@@ -51,7 +51,7 @@ Partial Class Form1
         Me.WebBrowser1.ScrollBarsEnabled = False
         Me.WebBrowser1.Size = New System.Drawing.Size(824, 372)
         Me.WebBrowser1.TabIndex = 0
-        Me.WebBrowser1.Url = New System.Uri("file:///C:/Users/RshnX5/Desktop/Writer_%20the%20internet%20typewriter.html", System.UriKind.Absolute)
+        Me.WebBrowser1.Url = New System.Uri("", System.UriKind.Relative)
         '
         'ListBox1
         '
@@ -149,7 +149,7 @@ Partial Class Form1
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = ""
+        Me.ColumnHeader4.Text = "Lock"
         Me.ColumnHeader4.Width = 40
         '
         'ColumnHeader5

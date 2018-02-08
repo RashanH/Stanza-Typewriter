@@ -24,9 +24,6 @@ Public Class Form1
         Microsoft.Win32.Registry.SetValue(Root & Key, AppName & ".exe", 11001)
         Microsoft.Win32.Registry.SetValue(Root & Key, AppName & ".vshost.exe", 11001)
 
-
-
-
         'get explorer directories
         For Each dics As String In My.Computer.FileSystem.GetDirectories(SavePath)
             ListBox1.Items.Add(dics.Replace(SavePath, ""))
@@ -192,15 +189,15 @@ Public Class Form1
         Return New String(fullString.Where(Function(x) Not Char.IsWhiteSpace(x)).ToArray())
     End Function
     Private Sub tmrStatus_Tick(sender As Object, e As EventArgs) Handles tmrStatus.Tick
-        Dim myElement As HtmlElement
-        myElement = WebBrowser1.Document.GetElementById("editor")
-        Dim text As String = myElement.GetAttribute("value")
+        ''Dim myElement As HtmlElement
+        '' myElement = WebBrowser1.Document.GetElementById("editor")
+        '' Dim text As String = myElement.GetAttribute("value")
 
-        Dim WordCound As String = CountWords(text)
-        Dim CharCount As String = RemoveWhitespace(text).Length
+        '' Dim WordCound As String = CountWords(text)
+        '' Dim CharCount As String = RemoveWhitespace(text).Length
 
 
-        lblCharCount.Text = "| Characters : " & CharCount & " | Words : " & WordCound & " |"
+        ''lblCharCount.Text = "| Characters : " & CharCount & " | Words : " & WordCound & " |"
     End Sub
 
     Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel1.MouseMove
@@ -250,13 +247,16 @@ Public Class Form1
                 If subitemindex.ToString = "4" Then 'delete
                     If ListBox1.SelectedItem.ToString = "Trash" Then 'trash can
                         Try
-                            My.Computer.FileSystem.DeleteFile(SavePath & "Trash\" & ListView1.SelectedItems(0).Text & ".txt")
+                            If MsgBox("Do you need to Delete permanantly?", MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then
+                                My.Computer.FileSystem.DeleteFile(SavePath & "Trash\" & ListView1.SelectedItems(0).Text & ".txt")
+                            End If
                         Catch ex As Exception
                             MsgBox(ex.Message)
                         End Try
                     Else
                         Try
                             '    My.Computer.FileSystem.DeleteFile()
+
                             My.Computer.FileSystem.MoveFile(SavePath & ListBox1.SelectedItem.ToString & "\" & ListView1.SelectedItems(0).Text & ".txt", SavePath & "Trash\" & ListView1.SelectedItems(0).Text & "@" & ListBox1.SelectedItem.ToString & ".txt")
                         Catch ex As Exception
                             MsgBox(ex.Message)
